@@ -1,0 +1,35 @@
+{
+  "name": "@lprfhxcqsioghw/dom-dimensions",
+  "version": "0.0.1",
+  "description": "Utility functions for measuring DOM elements",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel -d dist src/",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zvyiq4ksodlq/dom-dimensions.git"
+  },
+  "author": "zvyiq4ksodlq",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zvyiq4ksodlq/dom-dimensions/issues"
+  },
+  "homepage": "https://github.com/zvyiq4ksodlq/dom-dimensions#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "flow-bin": "^0.46.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2",
+      "flow"
+    ]
+  }
+}
