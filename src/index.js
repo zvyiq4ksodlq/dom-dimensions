@@ -4,11 +4,12 @@ export type Rectangle = {
   height: number
 };
 
-// IE9+
 /**
  * Measures the width of an element along the outer
  * edge. By default, will include both left and right
  * margins, but this is optional.
+ *
+ * Should work on IE9+
  */
 export function outerWidth(
   el: HTMLElement,
@@ -29,6 +30,8 @@ export function outerWidth(
  * Measures the height of an element along the outer
  * edge. By default, will include both top and bottom
  * margins, but this is optional.
+ *
+ * Should work on IE9+
  */
 export function outerHeight(
   el: HTMLElement,
