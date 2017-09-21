@@ -1,3 +1,19 @@
+export type Spacer = 'margin' | 'padding'
+export type Direction =
+  'top' | 'right' | 'bottom' | 'left'
+
+function measureGap(
+  el: HTMLElement,
+  spacer: Spacer,
+  directions: Direction[]
+): number {
+  const style = getComputedStyle(el);
+  const gap =
+    parseFloat(style.getPropertyValue(`${spacer}-${directions[0]}`)) +
+    parseFloat(style.getPropertyValue(`${spacer}-${directions[1]}`));
+  return gap;
+}
+
 /**
  * Measures the width of an element along the outer
  * edge. By default, will include both left and right
@@ -8,10 +24,7 @@
 export function outerWidth(el: HTMLElement, includeMargin = true): number {
   const width = el.getBoundingClientRect().width;
   if (!includeMargin) return width;
-  const style = getComputedStyle(el);
-  const marginX =
-    parseFloat(style.getPropertyValue('margin-left')) +
-    parseFloat(style.getPropertyValue('margin-right'));
+  const marginX = measureGap(el, 'margin', ['left', 'right']);
   return width + marginX;
 }
 
@@ -25,10 +38,7 @@ export function outerWidth(el: HTMLElement, includeMargin = true): number {
 export function outerHeight(el: HTMLElement, includeMargin = true): number {
   const height = el.getBoundingClientRect().height;
   if (!includeMargin) return height;
-  const style = getComputedStyle(el);
-  const marginY =
-    parseFloat(style.getPropertyValue('margin-top')) +
-    parseFloat(style.getPropertyValue('margin-bottom'));
+  const marginY = measureGap(el, 'margin', ['top', 'bottom']);
   return height + marginY;
 }
 
@@ -44,13 +54,8 @@ export function innerDimensions(
 ): [number, number] {
   const rect = el.getBoundingClientRect();
   if (!usePadding) return [rect.width, rect.height];
-  const style = getComputedStyle(el);
-  const paddingX =
-    parseFloat(style.getPropertyValue('padding-left')) +
-    parseFloat(style.getPropertyValue('padding-right'));
-  const paddingY =
-    parseFloat(style.getPropertyValue('padding-top')) +
-    parseFloat(style.getPropertyValue('padding-bottom'));
+  const paddingX = measureGap(el, 'padding', ['left', 'right']);
+  const paddingY = measureGap(el, 'padding', ['top', 'bottom']);
   return [rect.width - paddingX, rect.height - paddingY];
 }
 
@@ -61,10 +66,7 @@ export function innerDimensions(
 export function innerWidth(el: HTMLElement, usePadding = true): number {
   const width = el.getBoundingClientRect().width;
   if (!usePadding) return width;
-  const style = getComputedStyle(el);
-  const padding =
-    parseFloat(style.getPropertyValue('padding-left')) +
-    parseFloat(style.getPropertyValue('padding-right'));
+  const padding = measureGap(el, 'padding', ['left', 'right']);
   return width - padding;
 }
 
@@ -75,10 +77,7 @@ export function innerWidth(el: HTMLElement, usePadding = true): number {
 export function innerHeight(el: HTMLElement, usePadding = true): number {
   const height = el.getBoundingClientRect().height;
   if (!usePadding) return height;
-  const style = getComputedStyle(el);
-  const padding =
-    parseFloat(style.getPropertyValue('padding-top')) +
-    parseFloat(style.getPropertyValue('padding-bottom'));
+  const padding = measureGap(el, 'padding', ['top', 'bottom']);
   return height - padding;
 }
 
