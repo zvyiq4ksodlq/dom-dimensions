@@ -7,14 +7,12 @@
  */
 export function outerWidth(el: HTMLElement, includeMargin = true): number {
   const width = el.getBoundingClientRect().width;
-  if (includeMargin) {
-    const style = getComputedStyle(el);
-    const marginX =
-      parseFloat(style.getPropertyValue('margin-left')) +
-      parseFloat(style.getPropertyValue('margin-right'));
-    return width + marginX;
-  }
-  return width;
+  if (!includeMargin) return width;
+  const style = getComputedStyle(el);
+  const marginX =
+    parseFloat(style.getPropertyValue('margin-left')) +
+    parseFloat(style.getPropertyValue('margin-right'));
+  return width + marginX;
 }
 
 /**
@@ -26,14 +24,12 @@ export function outerWidth(el: HTMLElement, includeMargin = true): number {
  */
 export function outerHeight(el: HTMLElement, includeMargin = true): number {
   const height = el.getBoundingClientRect().height;
-  if (includeMargin) {
-    const style = getComputedStyle(el);
-    const marginY =
-      parseFloat(style.getPropertyValue('margin-top')) +
-      parseFloat(style.getPropertyValue('margin-bottom'));
-    return height + marginY;
-  }
-  return height;
+  if (!includeMargin) return height;
+  const style = getComputedStyle(el);
+  const marginY =
+    parseFloat(style.getPropertyValue('margin-top')) +
+    parseFloat(style.getPropertyValue('margin-bottom'));
+  return height + marginY;
 }
 
 /**
@@ -47,17 +43,15 @@ export function innerDimensions(
   usePadding = true,
 ): [number, number] {
   const rect = el.getBoundingClientRect();
-  if (usePadding) {
-    const style = getComputedStyle(el);
-    const paddingX =
-      parseFloat(style.getPropertyValue('padding-left')) +
-      parseFloat(style.getPropertyValue('padding-right'));
-    const paddingY =
-      parseFloat(style.getPropertyValue('padding-top')) +
-      parseFloat(style.getPropertyValue('padding-bottom'));
-    return [rect.width - paddingX, rect.height - paddingY];
-  }
-  return [rect.width, rect.height];
+  if (!usePadding) return [rect.width, rect.height];
+  const style = getComputedStyle(el);
+  const paddingX =
+    parseFloat(style.getPropertyValue('padding-left')) +
+    parseFloat(style.getPropertyValue('padding-right'));
+  const paddingY =
+    parseFloat(style.getPropertyValue('padding-top')) +
+    parseFloat(style.getPropertyValue('padding-bottom'));
+  return [rect.width - paddingX, rect.height - paddingY];
 }
 
 /**
@@ -66,14 +60,12 @@ export function innerDimensions(
  */
 export function innerWidth(el: HTMLElement, usePadding = true): number {
   const width = el.getBoundingClientRect().width;
-  if (usePadding) {
-    const style = getComputedStyle(el);
-    const padding =
-      parseFloat(style.getPropertyValue('padding-left')) +
-      parseFloat(style.getPropertyValue('padding-right'));
-    return width - padding;
-  }
-  return width;
+  if (!usePadding) return width;
+  const style = getComputedStyle(el);
+  const padding =
+    parseFloat(style.getPropertyValue('padding-left')) +
+    parseFloat(style.getPropertyValue('padding-right'));
+  return width - padding;
 }
 
 /**
@@ -82,14 +74,12 @@ export function innerWidth(el: HTMLElement, usePadding = true): number {
  */
 export function innerHeight(el: HTMLElement, usePadding = true): number {
   const height = el.getBoundingClientRect().height;
-  if (usePadding) {
-    const style = getComputedStyle(el);
-    const padding =
-      parseFloat(style.getPropertyValue('padding-top')) +
-      parseFloat(style.getPropertyValue('padding-bottom'));
-    return height - padding;
-  }
-  return height;
+  if (!usePadding) return height;
+  const style = getComputedStyle(el);
+  const padding =
+    parseFloat(style.getPropertyValue('padding-top')) +
+    parseFloat(style.getPropertyValue('padding-bottom'));
+  return height - padding;
 }
 
 /**
